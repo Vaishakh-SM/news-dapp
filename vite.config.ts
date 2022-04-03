@@ -1,9 +1,20 @@
-import * as reactPlugin from "vite-plugin-react"
-import type { UserConfig } from "vite"
+import { defineConfig } from "vite"
+import react from "@vitejs/plugin-react"
+import { viteExternalsPlugin } from "vite-plugin-externals"
 
-const config: UserConfig = {
-	jsx: "react",
-	plugins: [reactPlugin],
-}
-
-export default config
+// https://vitejs.dev/config/
+export default defineConfig({
+	plugins: [
+		react(),
+		// viteExternalsPlugin({
+		// 	electron: "electron",
+		// 	"electron-fetch": "electron-fetch",
+		// }),
+	],
+	optimizeDeps: {
+		exclude: ["ipfs-http-client", "electron-fetch"],
+	},
+	define: {
+		"process.env.NODE_ENV": "\"process.env.NODE_ENV\"",
+	},
+})

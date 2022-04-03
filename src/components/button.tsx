@@ -8,6 +8,9 @@ export function Button(props: {
 	variant?: "primary" | "secondary"
 	css?: CSS
 	link?: string
+	onClick?: () => void,
+	as?: any,
+	[key: string]: any
 }) {
 	return (
 		<>
@@ -21,7 +24,13 @@ export function Button(props: {
 					{props.children}
 				</ButtonContainer>
 			) : (
-				<ButtonContainer variant={props?.variant ?? "primary"} css={props.css}>
+				<ButtonContainer
+					variant={props?.variant ?? "primary"}
+					css={props.css}
+					onClick={props.onClick}
+					as={props.as}
+					{...props}
+				>
 					{props.children}
 				</ButtonContainer>
 			)}
