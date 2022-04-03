@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom"
 import { Home } from "./pages/home"
 import { Article } from "./pages/article"
 import { Tiptap } from "./pages/new"
+import { Blockchain } from "./pages/home/blockchain"
 
 const trial = async (provider: { getBlockNumber: () => any }) => {
 	const data = await provider.getBlockNumber()
@@ -39,6 +40,7 @@ function App() {
 				<Route path="/" element={<Home />} />
 				<Route path="/articles" element={<Home />}></Route>
 				<Route path="/articles/:id" element={<Article />} />
+				<Route path="/blockchain" element={<Blockchain />} />
 				<Route path="/new" element={<Tiptap />} />
 			</Routes>
 		</>

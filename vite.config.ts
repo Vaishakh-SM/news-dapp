@@ -12,7 +12,7 @@ export default defineConfig({
 		// }),
 	],
 	optimizeDeps: {
-		exclude: ["ipfs-http-client", "electron-fetch"],
+		// exclude: ["ipfs-http-client", "electron-fetch"],
 	},
 	define: {
 		"process.env.NODE_ENV": "\"process.env.NODE_ENV\"",

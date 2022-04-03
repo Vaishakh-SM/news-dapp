@@ -14,7 +14,7 @@ export function Navbar() {
 				}} variant="secondary">
 					<MagnifyingGlass weight="bold" />
 				</Button>
-				<Button>Connect MetaMask</Button>
+				<Button link="/new">Write</Button>
 			</NavbarInnerContainer>
 		</NavbarContainer>
 	)

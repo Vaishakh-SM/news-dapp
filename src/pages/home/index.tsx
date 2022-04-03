@@ -1,12 +1,21 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Button } from "../../components/button"
 import { Navbar } from "../../components/navbar"
 import { Body, H1, H2 } from "../../components/typography"
 import { styled } from "../../config/stitches"
 import map from "../images/press-freedom-ranking-2020-1200px.jpg"
 import { Article } from "./article"
+import { getArticles } from "./blockchain"
 
 export function Home() {
+	const[arr, setArr] = useState<any>([]);
+
+	useEffect(()=>{
+		getArticles().then((result)=>{
+			setArr(result);
+		})
+	},[])
+
 	return (
 		<>
 			<Navbar />
@@ -43,51 +52,20 @@ export function Home() {
 			</HomeSection>
 			<ArticleSections>
 				<H2>Just In</H2>
-				<Article
-					title="Lorem ipsum dolor sit amet."
-					author="Lorem ipsum"
-					content="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem inventore optio facilis fugiat expedita cumque debitis perspiciatis pariatur tempore recusandae?"
-					image={
-						"https://images.unsplash.com/photo-1648862141926-bd1b7467672f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80"
-					}
-					id="1234567890"
-				/>
-				<Article
-					title="Lorem ipsum dolor sit amet."
-					author="Lorem ipsum"
-					content="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem inventore optio facilis fugiat expedita cumque debitis perspiciatis pariatur tempore recusandae?"
-					image={
-						"https://images.unsplash.com/photo-1648862141926-bd1b7467672f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80"
-					}
-					id="1234567890"
-				/>
-				<Article
-					title="Lorem ipsum dolor sit amet."
-					author="Lorem ipsum"
-					content="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem inventore optio facilis fugiat expedita cumque debitis perspiciatis pariatur tempore recusandae?"
-					image={
-						"https://images.unsplash.com/photo-1648862141926-bd1b7467672f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80"
-					}
-					id="1234567890"
-				/>
-				<Article
-					title="Lorem ipsum dolor sit amet."
-					author="Lorem ipsum"
-					content="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem inventore optio facilis fugiat expedita cumque debitis perspiciatis pariatur tempore recusandae?"
-					image={
-						"https://images.unsplash.com/photo-1648862141926-bd1b7467672f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80"
-					}
-					id="1234567890"
-				/>
-				<Article
-					title="Lorem ipsum dolor sit amet."
-					author="Lorem ipsum"
-					content="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem inventore optio facilis fugiat expedita cumque debitis perspiciatis pariatur tempore recusandae?"
-					image={
-						"https://images.unsplash.com/photo-1648862141926-bd1b7467672f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80"
-					}
-					id="1234567890"
-				/>
+				{arr.map((x:any)=>{
+					return(<Article
+						title={x.title}
+						author={x.authorName}
+						content={x.description}
+						image={
+							"https://images.unsplash.com/photo-1648862141926-bd1b7467672f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80"
+						}
+						id={x.ipfsHash}
+						key={x.ipfsHash}
+					/>)
+				})}
+				
+				
 			</ArticleSections>
 		</>
 	)

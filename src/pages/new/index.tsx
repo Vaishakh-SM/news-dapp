@@ -15,6 +15,9 @@ import {
 	TextStrikethrough,
 } from "phosphor-react"
 import { H1 } from "../../components/typography"
+import { create } from "ipfs-http-client"
+import { ethers } from "ethers"
+import { initialize } from "../home/blockchain"
 
 export const Tiptap = () => {
 	const editor = useEditor({
@@ -27,6 +30,9 @@ export const Tiptap = () => {
 		},
 		content: "<p>Start painting your <b>ART</b>icle here...</p>",
 	})
+	const [title,setTitle] = useState("")
+	const [author, setAuthor] = useState("")
+	const [abstract, setAbstract] = useState("")
 
 	return (
 		<>
@@ -34,6 +40,19 @@ export const Tiptap = () => {
 				margin: 20,
 				marginBottom: 40
 			}}>Draft a new Article</H1>
+			<EditorContainer>
+				<Box>
+					<input placeholder="Title" value={title} onChange={(e) => {
+						setTitle(e.target.value)
+					}} />
+					<input placeholder="Author" value={author} onChange={(e) => {
+						setAuthor(e.target.value)
+					}} />
+					<input placeholder="Abstract" value={abstract} onChange={(e) => {
+						setAbstract(e.target.value)
+					}} />
+				</Box>
+			</EditorContainer>
 			<EditorContainer>
 				<Box
 					layout="row"
@@ -86,8 +105,13 @@ export const Tiptap = () => {
 				</Box>
 				<EditorContent editor={editor} />
 				<Button
-					onClick={() => {
+					onClick={async () => {
+						
 						console.log(editor?.getHTML())
+						const client = create({url:"https://ipfs.infura.io:5001"});
+    					const hash = await client.add(editor!.getHTML());
+    					
+						await initialize(hash.path, title, author, abstract);
 					}}
 					css={{
 						width: "max-content",
