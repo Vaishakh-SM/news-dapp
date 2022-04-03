@@ -3,6 +3,8 @@ import { ethers } from "ethers"
 import { Navbar } from "./components/navbar"
 import { Route, Routes } from "react-router-dom"
 import { Home } from "./pages/home"
+import { Article } from "./pages/article"
+import { Tiptap } from "./pages/new"
 
 const trial = async (provider: { getBlockNumber: () => any }) => {
 	const data = await provider.getBlockNumber()
@@ -33,14 +35,11 @@ function App() {
 
 	return (
 		<>
-			<Navbar />
-			{/* <div
-				style={{
-					marginTop: "150px",
-				}}
-			></div> */}
 			<Routes>
 				<Route path="/" element={<Home />} />
+				<Route path="/articles" element={<Home />}></Route>
+				<Route path="/articles/:id" element={<Article />} />
+				<Route path="/new" element={<Tiptap />} />
 			</Routes>
 		</>
 	)

@@ -1,16 +1,31 @@
 import { styled } from "../config/stitches"
 import React from "react"
 import { CSS } from "@stitches/react"
+import { Link } from "react-router-dom"
 
 export function Button(props: {
 	children: React.ReactNode
-	variant?: "primary" | "secondary",
-	css?: CSS,
+	variant?: "primary" | "secondary"
+	css?: CSS
+	link?: string
 }) {
 	return (
-		<ButtonContainer variant={props?.variant ?? "primary"} css={props.css}>
-			{props.children}
-		</ButtonContainer>
+		<>
+			{props.link !== undefined ? (
+				<ButtonContainer
+					variant={props?.variant ?? "primary"}
+					css={props.css}
+					as={Link}
+					to={props.link}
+				>
+					{props.children}
+				</ButtonContainer>
+			) : (
+				<ButtonContainer variant={props?.variant ?? "primary"} css={props.css}>
+					{props.children}
+				</ButtonContainer>
+			)}
+		</>
 	)
 }
 
@@ -19,7 +34,9 @@ const ButtonContainer = styled("button", {
 	borderRadius: "15px",
 	boxSizing: "border-box",
 	cursor: "pointer",
-	display: "inline-block",
+	display: "flex",
+	justifyContent: "center",
+	alignItems: "center",
 	fontFamily: "Anybody, sans-serif",
 	fontSize: "16px",
 	fontWeight: "600",
@@ -56,7 +73,7 @@ const ButtonContainer = styled("button", {
 			secondary: {
 				color: "$primary",
 				backgroundColor: "$text",
-				border: "none"
+				border: "none",
 			},
 		},
 	},

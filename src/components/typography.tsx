@@ -18,3 +18,9 @@ export const Body = styled("p", {
 	fontFamily: "Poppins, sans-serif",
 	color: "$primary",
 })
+
+export const P = styled("p", {
+	fontSize: "1rem",
+	fontFamily: "Poppins, sans-serif",
+	color: "$primary",
+})

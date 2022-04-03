@@ -1,12 +1,19 @@
 import { styled } from "../config/stitches"
 import React from "react"
 import { Button } from "./button"
+import { MagnifyingGlass } from "phosphor-react"
 
 export function Navbar() {
 	return (
 		<NavbarContainer>
 			<NavbarInnerContainer>
 				<Logo>News</Logo>
+				<Button css={{
+					marginLeft: "auto",
+					marginRight: "1rem",
+				}} variant="secondary">
+					<MagnifyingGlass weight="bold" />
+				</Button>
 				<Button>Connect MetaMask</Button>
 			</NavbarInnerContainer>
 		</NavbarContainer>
@@ -19,12 +26,11 @@ const NavbarContainer = styled("div", {
 	left: 0,
 	right: 0,
 	padding: "20px 0",
-	zIndex: 999
+	zIndex: 999,
 })
 
 const NavbarInnerContainer = styled("div", {
 	display: "flex",
-	justifyContent: "space-between",
 	alignItems: "center",
 	maxWidth: "1200px",
 	margin: "0 auto",
